@@ -1,28 +1,9 @@
+
 package agh.ii.prinjava.lab02.exc02_01.impl;
 
 import agh.ii.prinjava.lab02.exc02_01.StackOfInts;
 
 public class LinkedListBasedImpl implements StackOfInts {
-
-    @Override
-    public int pop() {
-        throw new IllegalStateException("To be implemented");
-    }
-
-    @Override
-    public void push(int x) {
-        throw new IllegalStateException("To be implemented");
-    }
-
-    @Override
-    public int numOfElems() {
-        return numOfElems;
-    }
-
-    @Override
-    public int peek() {
-        throw new IllegalStateException("To be implemented");
-    }
 
     private static class Node {
         int elem;
@@ -36,4 +17,41 @@ public class LinkedListBasedImpl implements StackOfInts {
 
     private Node first = null;
     private int numOfElems = 0;
+
+    @Override
+    public void push(int x) {
+        first = new Node(x, first);
+        numOfElems++;
+    }
+
+    @Override
+    public int pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException(
+                    "Cannot pop from an empty stack"
+            );
+        }
+
+        int value = first.elem;
+        first = first.next;
+        numOfElems--;
+
+        return value;
+    }
+
+    @Override
+    public int peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException(
+                    "Cannot peek an empty stack"
+            );
+        }
+
+        return first.elem;
+    }
+
+    @Override
+    public int numOfElems() {
+        return numOfElems;
+    }
 }

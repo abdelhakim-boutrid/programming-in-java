@@ -100,8 +100,28 @@ public class Main {
         }
     }
 
+    private static void countExecutions() {
+        Path file = Path.of("execution_count.txt");
+        int count = 0;
+
+        try {
+            if (Files.exists(file)) {
+                count = Integer.parseInt(Files.readString(file).trim());
+            }
+
+            count++;
+            Files.writeString(file, String.valueOf(count));
+
+            System.out.println("Program executed " + count + " time(s)");
+
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         // (write + read) + delete, byte-oriented
+        countExecutions();
         demo1();
         demo2();
         deleteDemoFile();
